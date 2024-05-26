@@ -229,8 +229,8 @@ class StyleTransfer(nn.Module):
         cc_feats = self.encode_with_intermediate(cc)
         ss_feats = self.encode_with_intermediate(ss)
         # calculate loss
-        loss_c = (self.calc_content_loss_once(gt_feats[-2], normalize(content_feats[-2])) +
-                  self.calc_content_loss_once(gt_feats[-1], normalize(content_feats[-1])))
+        loss_c = (self.calc_content_loss_once(normalize(gt_feats[-2]), normalize(content_feats[-2])) +
+                  self.calc_content_loss_once(normalize(gt_feats[-1]), normalize(content_feats[-1])))
         loss_s = self.calc_style_loss(gt_feats, style_feats)
         loss_id_1 = self.calc_content_loss_once(cc, content) + self.calc_content_loss_once(ss, style)
         loss_id_2 = self.calc_content_loss(cc_feats, content_feats) + self.calc_content_loss(ss_feats, style_feats)
